@@ -1,8 +1,9 @@
 #include"imx6ull.h"
 #include"led.h"
+// #include"gpt.h"
 
 int main()
 {
-	key_test();
+	gpt_test();
 	return 0;
 }

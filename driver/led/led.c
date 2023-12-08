@@ -2,24 +2,24 @@
 #include"led.h"
 
 void led_init(void) {
-    /* GPIO MODE */
+    /* 1.GPIO MODE */
     IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO27 &= ~(0xf << 0);
     IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO27 |=  (0x5 << 0);
 
-    /* Direction:Output */
+    /* 2.Direction:Output */
     GPIO1->GDIR |= (1 << 27);
 
-    /* Enable GPIO Clock */
+    /* 3.Enable GPIO Clock */
     CCM_CCGR1 |= (0x3 << 26);
 }
 
 void led_on(void) {
-    /* Outpur high level */
+    /* 4.1 Outpur high level */
     GPIO1->DR |= (1 << 27);
 }
 
 void led_off(void) {
-    /* Output low level */
+    /* 4.2 Output low level */
     GPIO1->DR &= ~(1 << 27);
 }
 
