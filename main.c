@@ -2,9 +2,10 @@
 #include"led.h"
 #include"gpt.h"
 #include"pwm.h"
+#include"uart.h"
 
 int main()
 {
-	pwm_test();
+	uart_printf_test();
 	return 0;
 }

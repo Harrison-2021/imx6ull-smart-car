@@ -1,0 +1,82 @@
+#include "imx6ull.h"
+#include "uart.h"
+
+void uart_init(void)
+{
+    /*Enable Uart1 Clock*/
+    CCM_CCGR5 |= (0x3 << 24);
+
+    /*PIN to Uart1 function*/
+    IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO16 &= ~(0xf << 0);//TX
+    IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO17 &= ~(0xf << 0);//RX
+
+    /*
+     8bit data,1bit stop,no even/odd,115200 bit/s
+    */
+    UART1->UCR2 = (1 << 1) | (1 << 2) | (1 << 5) | (0 << 6) | (0 << 8) | (1 << 14);
+    UART1->UCR3 = (1 << 2);
+    UART1->UFCR = (5 << 7);
+    UART1->UBIR = 9;
+    UART1->UBMR = 433;
+
+    /*Enable UART*/
+    UART1->UCR1 |= (1 << 0);
+
+    return;
+}
+
+void uart_send(uint8_t data)
+{
+    int flag;
+
+    UART1->UTXD = data;
+
+    //wait transmit complete
+    do{
+        flag = UART1->USR2 & (1 << 3);
+    }while(!flag);
+
+    return;
+}
+
+uint8_t uart_recv(void)
+{
+    int flag;
+
+    //wait data ready
+    do{
+        flag = UART1->USR2 & (1 << 0);
+    }while(!flag);
+
+    return UART1->URXD & 0xff;
+}
+
+void uart_puts(const char *str)
+{
+    const char *p = NULL;
+
+    uart_init();
+
+    for(p = str; *p ; p ++){
+        uart_send(*p);
+    }
+
+    return;
+}
+
+void uart_test(void)
+{
+    uint8_t data;
+
+    uart_init();
+
+    uart_puts("hello imx6ull\r\n");
+    uart_puts("hello uart1\r\n");
+
+    while(1){
+        data = uart_recv();
+        uart_send(data);
+    }
+
+    return;
+}
