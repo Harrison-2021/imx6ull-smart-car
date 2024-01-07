@@ -40,7 +40,8 @@ void pwm_test() {
 
     // sample数值写进FIFO缓存中，每次最多写4个，比较4次就清空了
     // 需要不断向FIFO中写sanple值，保证PWM波不断输出
-    for(int i = 0; i < 100; i++) {
+    int i;
+    for(i = 0; i < 100; i++) {
         set_sample_value(i * 10);
         gpt_delay_ms(500);
     }

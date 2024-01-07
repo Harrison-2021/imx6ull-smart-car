@@ -1,5 +1,5 @@
 CROSS_COMPILE=arm-linux-gnueabihf-
-CC=$(CROSS_COMPILE)gcc --std=c99
+CC=$(CROSS_COMPILE)gcc
 LD=$(CROSS_COMPILE)ld
 OBJCOPY=$(CROSS_COMPILE)objcopy #格式转换工具
 

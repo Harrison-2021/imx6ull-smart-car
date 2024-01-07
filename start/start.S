@@ -43,6 +43,7 @@ irq:
 	sub lr,lr,#4
 	stmfd sp!,{r0-r12,lr}
 
-	@bl do_irq
+	bl do_irq @处理中断函数
 
 	ldmfd sp!,{r0-r12,pc}^
+

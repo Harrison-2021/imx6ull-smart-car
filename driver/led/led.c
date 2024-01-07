@@ -24,8 +24,9 @@ void led_off(void) {
 }
 
 void delay_time(uint32_t time) {
-    for(int i = 0; i < 1000*time; i++) {
-        for(int j = 0; j < 50000; j++){}
+    int i, j;
+    for(i = 0; i < 1000*time; i++) {
+        for(j = 0; j < 50000; j++){}
     }
 }
 
