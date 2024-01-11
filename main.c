@@ -4,9 +4,10 @@
 #include"pwm.h"
 #include"uart.h"
 #include"key.h"
+#include"adc.h"
+
 int main()
 {
-	key_interrupt_test();
-	led_test();
+	adc_test();
 	return 0;
 }
