@@ -5,9 +5,10 @@
 #include"uart.h"
 #include"key.h"
 #include"adc.h"
+#include"wdt.h"
 
 int main()
 {
-	adc_test();
+	wdt_test();
 	return 0;
 }
