@@ -6,9 +6,10 @@
 #include"key.h"
 #include"adc.h"
 #include"wdt.h"
+#include"rtc.h"
 
 int main()
 {
-	wdt_test();
+	rtc_test();
 	return 0;
 }
