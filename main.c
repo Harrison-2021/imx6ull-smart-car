@@ -7,9 +7,9 @@
 #include"adc.h"
 #include"wdt.h"
 #include"rtc.h"
-
+#include"iic.h"
 int main()
 {
-	rtc_test();
+	iic_test();
 	return 0;
 }
