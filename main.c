@@ -10,6 +10,6 @@
 #include"iic.h"
 int main()
 {
-	iic_test();
+	hardware_iic_test();
 	return 0;
 }
