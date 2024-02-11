@@ -70,6 +70,5 @@ uint8_t hardware_ltr_5553als_read_register(uint8_t regaddr);
 void hardware_read_ltr_553als_manufac_id();
 void hardware_read_ltc_553als_ps_data();
 void hardware_read_ltc_553als_als_data();
-
 void hardware_iic_test();
 #endif

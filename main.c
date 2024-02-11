@@ -8,8 +8,11 @@
 #include"wdt.h"
 #include"rtc.h"
 #include"iic.h"
+#include"spi.h"
+
 int main()
 {
-	hardware_iic_test();
+	spi_test();
+	// hardware_iic_test();
 	return 0;
 }
