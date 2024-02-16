@@ -9,10 +9,12 @@
 #include"rtc.h"
 #include"iic.h"
 #include"spi.h"
+#include"onewire.h"
 
 int main()
 {
-	spi_test();
+	ds18b20_test();
+	// spi_test();
 	// hardware_iic_test();
 	return 0;
 }
