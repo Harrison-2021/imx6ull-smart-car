@@ -12,7 +12,7 @@ void gpt_init() {
     GPT1->CR |=  (0x1 << 6);
 
     /* 3.Select mode :Free-Run or Restart */
-    GPT1->CR |= (1 << 9);
+    // GPT1->CR |= (1 << 9);
 
     /* 4.Select Prescaler:65:1MHZ-->1us 增加一次*/
     GPT1->PR = 65;
@@ -62,4 +62,3 @@ void gpt_test() {
         gpt_delay_ms(500);
     }
 }
-

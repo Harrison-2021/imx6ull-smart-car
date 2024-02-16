@@ -4,8 +4,6 @@
 #include"uart.h"
 #include"gpt.h"
 
-#define DS18B20_HIGH_LEVEL 1
-#define DS18B20_LOW_LEVEL  0
 #define ONEWIRE_HIGH 1
 #define ONEWIRE_LOW  0
 #define READ_ROM 0x33
@@ -23,5 +21,6 @@ void ds18b20_write_bit(uint8_t bit);
 uint8_t ds18b20_read_bit();
 void ds18b20_write_byte(uint8_t data);
 void ds18b20_read_id();
+void ds18b20_read_temperature();
 
 #endif
