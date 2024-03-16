@@ -10,10 +10,13 @@
 #include"iic.h"
 #include"spi.h"
 #include"onewire.h"
+#include"flexcan.h"
+// void flexcan_loopback_test(void);
 
-int main()
-{
-	ds18b20_test();
+int main() {
+	flexcan_normal_test();
+	// flexcan_loopback_test();
+	//ds18b20_test();
 	// spi_test();
 	// hardware_iic_test();
 	return 0;

@@ -12,7 +12,7 @@ void gpt_init() {
     GPT1->CR |=  (0x1 << 6);
 
     /* 3.Select mode :Free-Run or Restart */
-    // GPT1->CR |= (1 << 9);
+    GPT1->CR |= (1 << 9); // Free-Run
 
     /* 4.Select Prescaler:65:1MHZ-->1us 增加一次*/
     GPT1->PR = 65;
@@ -37,11 +37,12 @@ void gpt_delay_sec(uint32_t sec) {
     gpt_delay_ms(sec * 1000);
 }
 void gpt_start() {
-    GPT1->CR |= (1 << 0) | (1 << 1);
+    // 设置ENMOD为1时，GPT counter value is reset to 0 when it is disabled
+    GPT1->CR |= (1 << 0) | (1 << 1); 
 }
 
 void gpt_stop() {
-    GPT1->CR &= ~(1 << 1);
+    GPT1->CR &= ~(1 << 0); // 使能位，不是1位
 }
 
 void wait_cmp_event() {
