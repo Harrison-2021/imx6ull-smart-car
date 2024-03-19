@@ -11,10 +11,12 @@
 #include"spi.h"
 #include"onewire.h"
 #include"flexcan.h"
-// void flexcan_loopback_test(void);
+#include"lcd.h"
+// void lcd_rgb888_test(void);
 
 int main() {
-	flexcan_normal_test();
+	lcd_rgb888_test();
+	// flexcan_normal_test();
 	// flexcan_loopback_test();
 	//ds18b20_test();
 	// spi_test();
