@@ -48,7 +48,7 @@ void flexcan_can_init(CAN_Type *base) {
     flexcan_freeze_enable(base);
 
     /*
-     4.SRX_DIS [17] 1 Self reception disabled
+     4.SRX_DIS [17] 1 Self reception disabled-开启的话，MB无法使用
     */
     base->MCR |= (1 << 17);
 
@@ -56,7 +56,7 @@ void flexcan_can_init(CAN_Type *base) {
      5.MAXMB [6:0] Number of the last MB = MAXMB
     */
     base->MCR &= ~(0x7f << 0);
-    base->MCR |=  (63 << 0); // 0-63
+    base->MCR |=  (63 << 0); // [0-63],共64个buffer
 
     /*
      6.配置完后，再解除冻结模式
@@ -164,7 +164,7 @@ void flexcan_rx_MB_config(CAN_Type *base, int index, int id) {
     base->MB[index].WORD1 = 0;
 
     /*3.Active MB，开始接收数据，接收成功后code会变为0010 full状态
-    CODE [27:24] 0b0100: EMPTY - MB is active and empty.*/ 
+    CODE [27:24] 0b0100: EMPTY - MB is active and empty.-开启MB,初始的CODE字段状态为empty*/ 
     base->MB[index].CS |= (0x4 << 24);
 }
 
@@ -177,7 +177,7 @@ void flexcan_send_data(CAN_Type *base, int id, uint8_t *buf, int size) {
     mb_data_t mb;
     mb.id = id;
     mb.size = size;
-    mb.index = TX_MB_INDEX;
+    mb.index = TX_MB_INDEX; // 读写buffer的index不同，读写都要经过缓冲区
     uint32_t word0 = 0;
     uint32_t word1 = 0;
     int i,flag;

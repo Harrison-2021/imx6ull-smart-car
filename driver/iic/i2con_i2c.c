@@ -88,7 +88,7 @@ void iic_con_send_data(I2C_Type* base, uint8_t* buf, uint32_t size) {
         // send data
         base->I2DR = buf[i];
 
-        // check send finish(receive success)
+        // check send finish(receive success)-通过中断确定从机是否发送ACK,决定是否继续发送
         do {
             flag = base->I2SR & (1 << 1);
         } while(!flag);
@@ -108,11 +108,11 @@ void iic_con_read_data(I2C_Type* base, uint8_t* buf, uint32_t size) {
     // ACK is sent(auto)
     base->I2CR &= ~((1 << 4) | (1 << 3));
 
-    // dummy data
+    // dummy data -需要先读取寄存器，触发寄存器放入数据
     dummy = base->I2DR;
 
     for(i = 0; i < size; i++) {
-        if(i == size -1) base->I2CR |= (1 << 3); // NACK
+        if(i == size -1) base->I2CR |= (1 << 3); // 读取最后字节前，自动发NACK=寄存器操作
         // wait one byte transfer is completed
         do {
             flag = base->I2SR & (1 << 1);
